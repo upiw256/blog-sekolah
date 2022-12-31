@@ -41,6 +41,8 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Auth::index');
 $routes->post('/auth/login', 'Auth::login');
 $routes->group('admin');
+$routes->get('news/get_more/(:num)', 'home::getMore/$1');
+$routes->get('/news/load_more', 'Home::load_more');
 
 /*
  * --------------------------------------------------------------------

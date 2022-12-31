@@ -6,8 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Document</title>
+    <style>
+        .pagination {
+            display: inline-flex;
+        }
 
+        .pagination li {
+            list-style: none;
+        }
+
+        .pagination a {
+            display: inline-block;
+            min-width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .pagination a.current {
+            background: #333;
+            color: #fff;
+        }
+
+        .pagination a:hover {
+            background: #333;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body class="bg-orange-300">
@@ -35,65 +67,68 @@
             </div>
         </div>
     </nav>
-    <div class="grid grid-rows-2">
-        <div class="grid md:grid-cols-3 gap-4 grid-cols-1 text-gray-200">
-            <div class="cols-span-1 md:col-span-2 p-4">
-                <!-- Card -->
-                <div class="mb-3 bg-orange-700 rounded overflow-hidden shadow-lg md:flex md:items-center">
-                    <div class="relative w-full h-64 lg:w-64">
-                        <img class="absolute top-0 left-0 w-full h-full object-cover" src="https://picsum.photos/1800/2000" alt="Image in frame">
-                    </div>
-                    <div class="px-6 py-4 md:w-2/3">
-                        <div class="font-bold text-xl mb-2">Card title</div>
-                        <p class=" text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                        </p>
-                        <a href="#" class="bg-blue-500 rounded p-1 text-sm">Read More</a>
-                    </div>
+    <div class="flex flex-col text-gray-300">
+        <div class="flex flex-col md:flex-row">
+            <div class=" md:w-4/5 w-screen  p-2">
+                <div class="flex flex-col ">
+                    <?php foreach ($news as $n) : ?>
+                        <div class="flex-1 " id="news-container">
+                            <!-- card -->
+                            <div class="mb-3 bg-orange-700 rounded overflow-hidden shadow-lg md:flex md:items-center">
+                                <div class="relative w-full h-64 lg:w-64">
+                                    <img class="absolute top-0 left-0 w-full h-full object-cover" src="<?= $n['img'] ?>" alt="Image in frame">
+                                </div>
+                                <div class="px-6 py-4 md:w-2/3">
+                                    <div class="font-bold text-xl mb-2"><?= $n['title'] ?></div>
+                                    <p class=" text-base">
+                                        <?= $n['content'] ?>
+                                    </p>
+                                    <a href="#" class="bg-orange-500 shadow rounded p-1 text-sm">Read More</a>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                    <?php endforeach; ?>
+
                 </div>
-                <div class="mb-3 bg-orange-700 rounded overflow-hidden shadow-lg md:flex md:items-center">
-                    <div class="relative w-full h-64 lg:w-64">
-                        <img class="absolute top-0 left-0 w-full h-full object-cover" src="https://picsum.photos/1800/2000" alt="Image in frame">
-                    </div>
-                    <div class="px-6 py-4 md:w-2/3">
-                        <div class="font-bold text-xl mb-2">Card title</div>
-                        <p class=" text-base">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                        </p>
-                        <a href="#" class="bg-blue-500 rounded p-1 text-sm">Read More</a>
-                    </div>
+                <div class="w-full text-center flex justify-center">
+                    <?= $pager->links() ?>
+                    <?= $pager->simpleLinks() ?>
                 </div>
 
-
-                <!-- end card -->
             </div>
-            <div class="cols-span-2 md:col-span-1 p-4">
-                <div class="mb-3 bg-orange-700 rounded overflow-hidden shadow-lg md:flex md:items-center">
-                    <div class="sm:ml-2 relative w-full h-64 lg:w-64">
-                        <img class="absolute top-0 left-0 w-full h-full object-cover" src="<?= base_url('assets') ?>/image/kepsek.png" alt="Image in frame">
-                    </div>
-                    <div class="px-6 py-4 md:w-2/3 text-center">
-                        <div class="font-bold text-xl mb-2 text-lg">Kepala Sekolah SMAN 1 Margaasih</div>
-                        <p class=" text-sm">
-                            Drs. Ade Rohaendi, M. Si
+            <div class=" md:w-2/5 w-screen p-2 mb-5">
+                <div class="flex justify-center">
+                    <div class="cols-span-2 md:col-span-1">
+                        <div class="bg-orange-700 rounded overflow-hidden shadow-lg md:flex md:items-center">
+                            <div class="sm:ml-2 relative w-full h-64 lg:w-64">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover" src="<?= base_url('assets') ?>/image/kepsek.png" alt="Image in frame">
+                            </div>
+                            <div class="px-6 py-4 md:w-2/3 text-center">
+                                <div class="font-bold text-xl mb-2 text-lg">Kepala Sekolah SMAN 1 Margaasih</div>
+                                <p class=" text-sm">
+                                    Drs. Ade Rohaendi, M. Si
 
-                        </p>
-                        <p class="text-base sm:text-xs">
-                            NIP. 196409101993021002
+                                </p>
+                                <p class="text-base sm:text-xs">
+                                    NIP. 196409101993021002
 
-                        </p>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="relative">
+        <div class="relative mt-4">
             <div class="fixed bottom-0">
-                <div class="bg-orange-500 w-screen text-white flex justify-center">asdasdsa</div>
+                <div class="bg-orange-500 w-screen text-white flex justify-center"><?= date("Y"); ?> &copy; SMAN 1 Margaasih</div>
             </div>
         </div>
 
     </div>
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuButton = document.getElementById('menu-button');

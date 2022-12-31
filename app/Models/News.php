@@ -20,8 +20,6 @@ class News extends Model
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];
@@ -39,4 +37,22 @@ class News extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+    public function get_all_news()
+    {
+        // Buat query untuk mengambil semua data dari tabel news
+        $builder = $this->db->table($this->table);
+
+        // Jalankan query dan kembalikan hasilnya
+        return $builder->get()->getResult();
+    }
+    public function getNews($perPage = 10, $page = 1)
+    {
+        $builder = $this->db->table($this->table)
+            ->where('status', 'published')
+            ->orderBy('created_at', 'desc')
+            ->limit($perPage, $page);
+
+        // Jalankan query dan kembalikan hasilnya
+        return $builder->get()->getResult();
+    }
 }
