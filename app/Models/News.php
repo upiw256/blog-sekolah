@@ -55,4 +55,24 @@ class News extends Model
         // Jalankan query dan kembalikan hasilnya
         return $builder->get()->getResult();
     }
+    public function getNewsSummary($id)
+  {
+    $builder = $this->db->table($this->table)
+      ->select('*')
+      ->where('id', $id)
+      ->where('status', 'published');
+
+    // Jalankan query dan kembalikan hasilnya
+    $news = $builder->get()->getRow();
+
+    return $news;
+  }
+  public function search($id)
+{
+  // dd($id);
+  $builder = $this->db->table($this->table);
+  $builder->like('title', $id['cari']);
+  $builder->orlike('content', $id['cari']);;
+    return $builder->get()->getRow();
+}
 }

@@ -15,4 +15,26 @@ class Home extends BaseController
         ];
         return view('home/home', $data);
     }
+    public function read($id)
+  {
+    // Buat instance dari model NewsModel
+    $newsModel = new News();
+
+    // Dapatkan data berita yang akan ditampilkan
+    $data['news'] = $newsModel->getNewsSummary($id);
+
+    // Tampilkan view
+    if (!$data['news']) {
+    return view('errors/404');
+    }
+    return view('home/news', $data);
+  }
+  public function search_ajax()
+{
+    $news = new News();
+    $keyword = $this->request->getVar();
+    // dd($news->search($keyword));
+    $data=['news'=>$news->search($keyword)];
+    
+}
 }
