@@ -1,4 +1,4 @@
-<?php $this->extend('home/layout/template'); ?>
+<?php $this->extend('layout/template'); ?>
 <?php $this->section('content'); ?>
 <div class="m-3 rounded overflow-hidden shadow-lg bg-orange-700 p-3">
   <div class="h-screen flex flex-col lg:flex-row item-center text-gray-300">

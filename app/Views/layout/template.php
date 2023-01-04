@@ -64,7 +64,7 @@
             <div class="hidden sm:block" id="menu">
                 <div class="flex flex-col sm:flex-row">
                     <a href="/" class="px-3 py-2 rounded-md text-sm font-medium leading-5 hover:text-white focus:outline-none focus:text-white transition duration-150 ease-in-out">Home</a>
-                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium leading-5 hover:text-white focus:outline-none focus:text-white transition duration-150 ease-in-out">News</a>
+                    <a href="/news" class="px-3 py-2 rounded-md text-sm font-medium leading-5 hover:text-white focus:outline-none focus:text-white transition duration-150 ease-in-out">News</a>
                 </div>
             </div>
         </div>

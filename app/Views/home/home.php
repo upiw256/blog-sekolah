@@ -1,4 +1,4 @@
-<?php $this->extend('home/layout/template'); ?>
+<?php $this->extend('layout/template'); ?>
 <?php $this->section('content'); ?>
 <form id="search-form" class="relative rounded-md shadow-sm ml-3 mt-3 mr-3" action="/news/cari" method="get">
     <input id="keyword" name="cari" class="form-input py-2 pl-10 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="Cari...">
