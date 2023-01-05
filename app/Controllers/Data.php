@@ -10,9 +10,16 @@ class Data extends BaseController
     {
         $client = new Client();
 
-        $response = $client->request('GET', 'http://app.sman1margaasih.sch.id:8080/');
+        $sekolah = $client->request('GET', 'http://app.sman1margaasih.sch.id:8080/');
+        $siswa = $client->request('GET', 'http://app.sman1margaasih.sch.id:8080/siswa');
+        $rombel = $client->request('GET', 'http://app.sman1margaasih.sch.id:8080/rombel');
+        // $response = $client->request('GET', 'http://app.sman1margaasih.sch.id:8080/');
 
-        $data['items'] = json_decode($response->getBody());
+        $data=[
+            'sekolah'=>json_decode($sekolah->getBody()),
+            'siswa'=>json_decode($sekolah->getBody()),
+            'rombel'=>json_decode($sekolah->getBody())
+            ] ;
 
         return view('home/data', $data);
     

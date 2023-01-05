@@ -30,10 +30,10 @@
       <h2 class="text-2xl font-bold">SMAN 1 Margaasih</h2>
       <p class="text-xs font-thin text-red-400">*Yang terdata didapodik</p>
       <div class="flex flex-col">
-        <p>Nama Sekolah: <?= $items->rows->nama ?></p>
-        <p>NPSN: <?= $items->rows->npsn ?></p>
-        <p>NSS: <?= $items->rows->nss ?></p>
-        <p>Alamat: <?= $items->rows->alamat_jalan.' RT: 0'.$items->rows->rt.' / 0'.$items->rows->rw.' Desa '. $items->rows->desa_kelurahan.' '.$items->rows->kecamatan.' '.$items->rows->kabupaten_kota?></p>
+        <p>Nama Sekolah: <?= $sekolah->rows->nama ?></p>
+        <p>NPSN: <?= $sekolah->rows->npsn ?></p>
+        <p>NSS: <?= $sekolah->rows->nss ?></p>
+        <p>Alamat: <?= $sekolah->rows->alamat_jalan.' RT: 0'.$sekolah->rows->rt.' / 0'.$sekolah->rows->rw.' Desa '. $sekolah->rows->desa_kelurahan.' '.$sekolah->rows->kecamatan.' '.$sekolah->rows->kabupaten_kota?></p>
 
     </div>
     </div>
