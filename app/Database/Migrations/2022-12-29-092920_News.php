@@ -24,7 +24,7 @@ class News extends Migration
 				'constraint'     => 100,
 			],
 			'content' => [
-				'type'           => 'TEXT',
+				'type'           => 'LONGTEXT',
 				'null'           => true,
 			],
 			'status'      => [

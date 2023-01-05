@@ -1,6 +1,6 @@
 <?php $this->extend('layout/template'); ?>
 <?php $this->section('content'); ?>
-<div class="m-3 rounded overflow-hidden shadow-lg bg-orange-700 p-3">
+<div class="m-3 rounded overflow-y-scroll scroll-smooth hover:scroll-auto shadow-lg bg-orange-700 p-3">
   <div class="h-screen flex flex-col lg:flex-row item-center text-gray-300">
     <img class="h-full lg:w-2/4" src="<?= $news->img ?>" alt="Gambar">
     <div class="px-6 py-4">
