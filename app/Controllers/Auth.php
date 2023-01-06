@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-
+use App\Models\Users;
 class Auth extends BaseController
 {
     public function index()
@@ -12,11 +12,32 @@ class Auth extends BaseController
     }
     public function login()
     {
-        $encrypter = \Config\Services::encrypter();
+        $model = new Users();
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
-        $enc = $encrypter->encrypt($password);
-        $dec = $encrypter->decrypt($enc);
-        dd($dec);
+        $user = $model->where('username', $username)
+                      ->first();
+                      if (!$user)
+                      {
+                          session()->setFlashdata('error', 'Username tidak ditemukan.');
+                          return redirect()->to('/login');
+                      }
+              
+                      if (!password_verify($password, $user['password']))
+                      {
+                        dd(password_verify($password, $user['password']));
+                          session()->setFlashdata('error', 'Password salah.');
+                          return redirect()->to('/login');
+                      }
+                      $data = [
+                        'id' => $user['id'],
+                        'username' => $user['username'],
+                        'level' => $user['level'],
+                        'logged_in' => true
+                    ];
+            
+                    session()->set($data);
+                    echo "berhasil";
+
     }
 }

@@ -26,7 +26,11 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
+                <?php if (session()->getFlashdata('error')): ?>
+                    <div class="alert alert-danger">
+                        <?= session()->getFlashdata('error') ?>
+                    </div>
+                <?php endif ?>
                 <form action="<?= base_url('auth/login') ?>" method="post">
                     <div class="input-group mb-3">
                         <input type="email" name="username" class="form-control" placeholder="Email">
