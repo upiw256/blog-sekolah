@@ -10,7 +10,7 @@ class Users extends Seeder
     {
         $data = [
             'username' => 'admin',
-            'password'    => 'admin123',
+            'password'    => password_hash('admin123', PASSWORD_DEFAULT),
         ];
         $this->db->table('users')->insert($data);
     }
