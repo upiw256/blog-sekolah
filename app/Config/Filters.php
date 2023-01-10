@@ -2,12 +2,14 @@
 
 namespace Config;
 
+use App\Filters\FilterAuth as FilterAuth;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+// use app\Filters\FilterAuth;
 
 class Filters extends BaseConfig
 {
@@ -23,6 +25,7 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'isLoggedIn'    => FilterAuth::class
     ];
 
     /**
@@ -68,5 +71,7 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'isLoggedIn' => ['before' => ['admin/*']],
+    ];
 }

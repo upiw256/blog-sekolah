@@ -41,10 +41,14 @@ $routes->get('/', 'Data::index');
 $routes->get('/news', 'Home::index');
 $routes->get('/login', 'Auth::index');
 $routes->post('/auth/login', 'Auth::login');
-// $routes->group('admin');
-// $routes->get('/news/load_more', 'Home::load_more');
 $routes->get('news/read/(:num)', 'home::read/$1');
 $routes->get('/news/cari', 'home::search_ajax');
+$routes->group('admin' , function($routes)
+{
+    // Route "/admin/users" akan terdaftar di sini
+    $routes->get('/', 'admin::index');
+    $routes->get('new', 'admin::new');
+});
 // $routes->get('news/search_ajax?keyword=(:num)', 'home::search_ajax/$1');
 
 /*

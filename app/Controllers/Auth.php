@@ -37,7 +37,7 @@ class Auth extends BaseController
                     ];
             
                     session()->set($data);
-                    echo "berhasil";
+                    return redirect()->to('/admin');
 
     }
 }
