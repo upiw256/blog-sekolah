@@ -25,8 +25,9 @@ class FilterAuth implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->get('isLoggedIn') !== true)
+        if (session()->get('logged_in') !== true)
         {
+            // dd(session()->get());
             // Jika belum, redirect ke form login
             return redirect()->to('/login');
         }

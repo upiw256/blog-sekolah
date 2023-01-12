@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
-
+use App\Models\News;
 class Admin extends ResourceController
 {
     /**
@@ -13,7 +13,50 @@ class Admin extends ResourceController
      */
     public function index()
     {
-        return view('layout/admin_template');
+        $session = \Config\Services::session();
+        if ($session->get('logged_in')!==true) {
+            return redirect()->to('/login');
+        }
+        $data=  
+        [
+            'users'=>$session->get('level'),
+            'menu'=>'menu',
+            'submenu'=>'home'
+        ];
+        return view('dashboard/index',$data);
+    }
+    public function news()
+    {
+        $newsModel = new News();
+        
+        $session = \Config\Services::session();
+        if ($session->get('logged_in')!==true) {
+            return redirect()->to('/login');
+        }
+        
+        $data=  
+        [
+            'users'=>$session->get('level'),
+            'menu'=>'menu',
+            'submenu'=>'news',
+            'news'=>$newsModel->get_all()
+        ];
+        return view('dashboard/news',$data);
+    }
+    
+    public function syncron()
+    {
+        $session = \Config\Services::session();
+        if ($session->get('logged_in')!==true) {
+            return redirect()->to('/login');
+        }
+        $data=  
+        [
+            'users'=>$session->get('level'),
+            'menu'=>'menu',
+            'submenu'=>'news'
+        ];
+        return view('dashboard/news',$data);
     }
 
     /**
@@ -33,7 +76,7 @@ class Admin extends ResourceController
      */
     public function new()
     {
-        echo "oke";
+        
     }
 
     /**
@@ -53,7 +96,22 @@ class Admin extends ResourceController
      */
     public function edit($id = null)
     {
-        //
+        $session = \Config\Services::session();
+        $newsModel = new News();
+        $hasil= base64_decode($id);
+        // Dapatkan data berita yang akan ditampilkan
+        $data = [
+            'news'=>$newsModel->getNewsSummary($hasil),
+            'menu'=>'menu',
+            'submenu'=>'news',
+            'users'=>$session->get('level'),
+        ];
+
+        // Tampilkan view
+        if (!$data['news']) {
+        return view('errors/404');
+        }
+        return view('dashboard/edit_news', $data);
     }
 
     /**

@@ -36,6 +36,7 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
+            // 'isLoggedIn'
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
@@ -72,6 +73,6 @@ class Filters extends BaseConfig
      * @var array
      */
     public $filters = [
-        'isLoggedIn' => ['before' => ['admin/*']],
+        'isLoggedIn' => ['before' => ['login/*']],
     ];
 }

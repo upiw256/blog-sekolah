@@ -43,13 +43,13 @@ $routes->get('/login', 'Auth::index');
 $routes->post('/auth/login', 'Auth::login');
 $routes->get('news/read/(:num)', 'home::read/$1');
 $routes->get('/news/cari', 'home::search_ajax');
-$routes->group('admin' , function($routes)
+$routes->group('admin' ,['isLoggedIn' => true], function($routes)
 {
     // Route "/admin/users" akan terdaftar di sini
     $routes->get('/', 'admin::index');
-    $routes->get('new', 'admin::new');
+    $routes->get('news', 'admin::news');
+    $routes->get('news/(:any)', 'admin::edit/$1');
 });
-// $routes->get('news/search_ajax?keyword=(:num)', 'home::search_ajax/$1');
 
 /*
  * --------------------------------------------------------------------

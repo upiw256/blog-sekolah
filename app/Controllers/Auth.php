@@ -25,7 +25,7 @@ class Auth extends BaseController
               
                       if (!password_verify($password, $user['password']))
                       {
-                        dd(password_verify($password, $user['password']));
+                        // dd(password_verify($password, $user['password']));
                           session()->setFlashdata('error', 'Password salah.');
                           return redirect()->to('/login');
                       }
@@ -36,7 +36,9 @@ class Auth extends BaseController
                         'logged_in' => true
                     ];
             
-                    session()->set($data);
+                    // $this->session()->set($data);
+                    $session = \Config\Services::session();
+                    $session->set($data);
                     return redirect()->to('/admin');
 
     }
