@@ -37,7 +37,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <form action="/admin/news/update" method="post">
+              <form action="/admin/news/update" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputTitle">Judul</label>
                   <input type="text" class="form-control mb-3" name="title" value="<?=$news->title?>">
