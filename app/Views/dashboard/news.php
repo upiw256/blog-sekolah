@@ -30,8 +30,26 @@
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
               </div>
+              
               <!-- /.card-header -->
               <div class="card-body">
+              <?php
+              if (session()->get('error')) {?>
+                <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                  <?= session()->get('error')?>
+                </div>
+              <?php } ?>
+              <?php
+              if (session()->get('message')) {?>
+                <div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                  <?= session()->get('message')?>
+                </div>
+              <?php }
+              ?>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>

@@ -28,7 +28,6 @@ class Admin extends ResourceController
     public function news()
     {
         $newsModel = new News();
-        
         $session = \Config\Services::session();
         if ($session->get('logged_in')!==true) {
             return redirect()->to('/login');
@@ -97,6 +96,9 @@ class Admin extends ResourceController
     public function edit($id = null)
     {
         $session = \Config\Services::session();
+        if ($session->get('logged_in')!==true) {
+            return redirect()->to('/login');
+        }
         $newsModel = new News();
         $hasil= base64_decode($id);
         // Dapatkan data berita yang akan ditampilkan
@@ -121,7 +123,43 @@ class Admin extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        $session = \Config\Services::session();
+        if ($session->get('logged_in')!==true) {
+            return redirect()->to('/login');
+        }
+        $file = $this->request->getFile('img');
+        $author = $session->get("username");
+        $title = $this->request->getVar("title");
+        $content = $this->request->getVar("content");
+        $fileSize = $file->getSize();
+        if($fileSize > 2 * 1024 * 1024) {
+        // Ukuran file lebih dari 2MB
+        // Tampilkan pesan error atau redirect ke halaman yang sesuai
+        return redirect()->to('/admin/news')->with('error', 'Ukuran file maksimal 2MB');
+        }
+        // Mendapatkan tipe file
+        $fileType = $file->getMimeType();
+        // Memverifikasi bahwa file yang diupload hanya merupakan gambar saja
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if(!in_array($fileType, $allowedTypes)) {
+        // Tipe file yang diupload bukan gambar
+        // Tampilkan pesan error atau redirect ke halaman yang sesuai
+        return redirect()->to('/admin/news')->with('error', 'Hanya file gambar yang diperbolehkan');
+        }
+        $fileName = $file->getRandomName();
+        $file->move(ROOTPATH . 'public/assets/image/upload/', $fileName);
+        
+        // code untuk menyimpan informasi file ke dalam database
+        $newsModel = new News();
+        $newsModel->table('news')->set([
+        'title' => $title,
+        'author' => $author,
+        'content'=> trim($content),
+        'img' => base_url('/assets/image/upload/').'/'.$fileName
+        ])->where('id',$id);
+        $newsModel->update();
+        // redirect ke halaman yang sesuai
+        return redirect()->to('/admin/news')->with('message', 'Data Berhasil di tambah');
     }
 
     /**

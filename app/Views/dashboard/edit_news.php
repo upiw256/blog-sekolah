@@ -37,7 +37,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <form action="/admin/news/update" method="post" enctype="multipart/form-data">
+              <form action="/admin/news/update/<?= $news->id?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputTitle">Judul</label>
                   <input type="text" class="form-control mb-3" name="title" value="<?=$news->title?>">
@@ -53,43 +53,10 @@
                       <img id="preview" class="mt-3" src="<?=$news->img?>" alt="Image Preview" hight=200 width=200>
                       <button clasa="btn btn-danger" type="button" id="removeButton">x</button>
                     </div>
-                    <script>
-                      // Select the input element
-                    const input = document.querySelector('input[type="file"]');
-                    // Select the image element
-                    const img = document.getElementById('preview');
-
-                    const label = document.getElementById("titleImage");
-
-                    const removeButton = document.querySelector('#removeButton');
-                    // Listen for changes to the input element
-                    input.addEventListener('change', (event) => {
-                      // Get the file that was selected
-                      const file = event.target.files[0];
-                      console.log(file);
-                      label.innerText = file.name;
-                      // Create a new FileReader object
-                      const reader = new FileReader();
-
-                      // Listen for the 'load' event on the FileReader
-                      reader.addEventListener('load', (event) => {
-                        // Update the src attribute of the img element
-                        img.src = event.target.result;
-                      });
-
-                      // Read the file as data URL
-                      reader.readAsDataURL(file);
-                    });
-                    removeButton.addEventListener('click', () => {
-                      // Clear the src attribute of the img element
-                      img.src = "";
-                      label.innerText = "";
-                      // Clear the input value
-                      input.value = null;
-                    });
-                    </script>
-                  </div>
+                    
                 </div>
+                <input type="submit" value="Update" class="btn btn-primary col-lg-12 mt-3">
+            </div>
               </form>
             </div>
           </div>
@@ -100,4 +67,39 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+<script>
+    // Select the input element
+const input = document.querySelector('input[type="file"]');
+// Select the image element
+const img = document.getElementById('preview');
+
+const label = document.getElementById("titleImage");
+
+const removeButton = document.querySelector('#removeButton');
+// Listen for changes to the input element
+input.addEventListener('change', (event) => {
+    // Get the file that was selected
+    const file = event.target.files[0];
+    console.log(file);
+    label.innerText = file.name;
+    // Create a new FileReader object
+    const reader = new FileReader();
+
+    // Listen for the 'load' event on the FileReader
+    reader.addEventListener('load', (event) => {
+    // Update the src attribute of the img element
+    img.src = event.target.result;
+    });
+
+    // Read the file as data URL
+    reader.readAsDataURL(file);
+});
+removeButton.addEventListener('click', () => {
+    // Clear the src attribute of the img element
+    img.src = "";
+    label.innerText = "";
+    // Clear the input value
+    input.value = null;
+});
+</script>
 <?php $this->endSection(); ?>
