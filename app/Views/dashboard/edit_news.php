@@ -40,16 +40,16 @@
               <form action="/admin/news/update/<?= $news->id?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputTitle">Judul</label>
-                  <input type="text" class="form-control mb-3" name="title" value="<?=$news->title?>">
+                  <input type="text" class="form-control mb-3" name="title" value="<?=$news->title?>" required>
                   <label for="exampleInputContent">Isi Berita</label>
-                  <textarea id="summernote" name="content">
+                  <textarea id="summernote" name="content" required>
                     <?=$news->content?>
                   </textarea>
                   <label for="exampleInputFile"> Upload Gambar</label>
                   <div class="input-group">
                     <div class="costum-file">
-                      <input class="custom-file-input" type="file" name="img" id="fileInput" accept="image/*">
-                      <label class="custom-file-label" for="exampleInputFile" id="titleImage"></label>
+                      <input class="custom-file-input" type="file" name="img" id="fileInput" accept="image/*" required>
+                      <label class="custom-file-label" for="exampleInputFile" id="titleImage"><?=$news->img?></label>
                       <img id="preview" class="mt-3" src="<?=$news->img?>" alt="Image Preview" hight=200 width=200>
                       <button clasa="btn btn-danger" type="button" id="removeButton">x</button>
                     </div>

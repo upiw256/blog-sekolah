@@ -82,12 +82,55 @@
                             </div>
                            
                             <div class="d-flex flex-column">
-                                <i class="fas fa-trash"></i>
-                                <p>Hapus</p>
+                              <button onclick="executeExample()" class="btn btn-none text-danger">
+                                  <i class="fas fa-trash"></i>
+                                  <p>Hapus</p>
+                              </button>
                             </div>
                         </div>
                     </td>
                   </tr>
+                  <script>
+                    
+                    function executeExample() {
+                      const swalWithBootstrapButtons = Swal.mixin({
+                          customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                          },
+                          buttonsStyling: false
+                        })
+
+                        swalWithBootstrapButtons.fire({
+                          title: 'Are you sure?',
+                          text: "You won't be able to revert this!",
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonText: 'Yes, delete it!',
+                          cancelButtonText: 'No, cancel!',
+                          reverseButtons: true
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            swalWithBootstrapButtons.fire(
+                              'Deleted!',
+                              'Your file has been deleted.',
+                              'success'
+                            )
+                            window.location.href = "<?= base_url("/admin/news?delete=".base64_encode($n['id'])) ?>";
+                          } else if (
+                            /* Read more about handling dismissals below */
+                            result.dismiss === Swal.DismissReason.cancel
+                          ) {
+                            swalWithBootstrapButtons.fire(
+                              'Cancelled',
+                              'Your imaginary file is safe :)',
+                              'error'
+                            )
+                          }
+                        })
+                      }
+                    
+                  </script>
                   <?php endforeach; ?>
                   </tfoot>
                 </table>

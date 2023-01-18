@@ -27,6 +27,7 @@ class Admin extends ResourceController
     }
     public function news()
     {
+        $delete = $this->request->getGet('delete');
         $newsModel = new News();
         $session = \Config\Services::session();
         if ($session->get('logged_in')!==true) {
@@ -38,8 +39,12 @@ class Admin extends ResourceController
             'users'=>$session->get('level'),
             'menu'=>'menu',
             'submenu'=>'news',
-            'news'=>$newsModel->get_all()
+            'news'=>$newsModel->get_all(),
         ];
+        if ($delete!==null) {
+            $newsModel->delete(base64_decode($delete));
+            return redirect()->to('/admin/news')->with('message', 'Data Berhasil di hapus');
+        }
         return view('dashboard/news',$data);
     }
     
@@ -95,6 +100,7 @@ class Admin extends ResourceController
      */
     public function edit($id = null)
     {
+        
         $session = \Config\Services::session();
         if ($session->get('logged_in')!==true) {
             return redirect()->to('/login');
@@ -107,6 +113,7 @@ class Admin extends ResourceController
             'menu'=>'menu',
             'submenu'=>'news',
             'users'=>$session->get('level'),
+            
         ];
 
         // Tampilkan view
@@ -155,7 +162,7 @@ class Admin extends ResourceController
         'title' => $title,
         'author' => $author,
         'content'=> trim($content),
-        'img' => base_url('/assets/image/upload/').'/'.$fileName
+        'img' => $fileName
         ])->where('id',$id);
         $newsModel->update();
         // redirect ke halaman yang sesuai
@@ -169,6 +176,6 @@ class Admin extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        
     }
 }
