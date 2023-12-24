@@ -27,15 +27,13 @@ $this->section('admin'); ?>
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-header">
-              <button class="btn btn-primary">
-                <i class="fas fa-plus"></i> Tambah berita
-              </button>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
+              <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
                   <tr>
                     <th>Judul</th>
                     <th>Penulis</th>
@@ -66,20 +64,20 @@ $this->section('admin'); ?>
                       </td>
                       <td>
                         <div class="d-flex justify-content-around">
-                          <div class="d-flex flex-column">
-                            <a href="/admin/news/<?= base64_encode($n['id']) ?>">
-                              <i class="fas fa-edit"></i>
-                              <p>Edit</p>
-                            </a>
-                          </div>
-
-                          <div class="d-flex flex-column">
-                            <i class="fas fa-trash"></i>
-                            <p>Hapus</p>
-                          </div>
+                            <div class="d-flex flex-column">
+                              <a href="/admin/news/<?= base64_encode($n['id'])  ?>">
+                                <i class="fas fa-edit"></i>
+                                <p>Edit</p>
+                              </a>
+                            </div>
+                           
+                            <div class="d-flex flex-column">
+                                <i class="fas fa-trash"></i>
+                                <p>Hapus</p>
+                            </div>
                         </div>
-                      </td>
-                    </tr>
+                    </td>
+                  </tr>
                   <?php endforeach; ?>
                   </tfoot>
               </table>

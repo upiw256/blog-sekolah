@@ -12,6 +12,7 @@
     <div class="flex flex-col md:flex-row">
         <div class="w-screen p-2">
             <div class="flex flex-col ">
+            
                 <?php
                 foreach ($news as $n) :
                 ?>
@@ -24,9 +25,7 @@
                             </div>
                             <div class="px-6 py-4 md:w-2/3">
                                 <div class="font-bold text-xl mb-2"><?= $n['title'] ?></div>
-                                <p class=" text-base">
                                     <?= substr($n['content'], 0, 250) . '...' ?>
-                                </p>
                                 <a href="/news/read/<?= $n['id'] ?>" class="bg-orange-500 shadow rounded p-1 text-sm">Read More</a>
                             </div>
                         </div>
