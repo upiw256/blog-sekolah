@@ -49,6 +49,7 @@ $routes->group('admin' ,['isLoggedIn' => true], function($routes)
     $routes->get('/', 'admin::index');
     $routes->get('news', 'admin::news');
     $routes->get('news/(:any)', 'admin::edit/$1');
+    $routes->post('news/update', 'admin::update');
 });
 
 /*

@@ -18,6 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel='shorcut icon' href="<?= base_url('assets') ?>/image/logo.png">
@@ -192,6 +193,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -208,6 +210,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
       "responsive": true,
     });
   });
+  $(document).ready(function() {
+  $('#summernote').summernote({
+    height: 300,
+    minHeight: null,
+    maxHeight: null,
+    focus: true,
+    toolbar: [
+              ['style', ['style']],
+              ['font', ['bold', 'underline', 'clear']],
+              ['fontname', ['fontname']],
+              ['color', ['color']],
+              ['para', ['ul', 'ol', 'paragraph']],
+              ['table', ['table']],
+              ['insert', ['link']],
+              ['view', ['fullscreen', 'codeview', 'help']],
+            ],
+  });
+}); 
+
 </script>
 </body>
 </html>
