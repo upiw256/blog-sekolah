@@ -68,8 +68,8 @@
     </style>
 </head>
 
-<body class="bg-orange-300">
-    <nav class="bg-orange-500 text-white">
+<body class="bg-blue-300">
+    <nav class="bg-blue-500 text-white">
         <div class="container mx-auto flex items-center justify-between px-4 py-3">
             <div class="flex items-center">
                 <a href="/" class="flex flex-row ">
@@ -101,7 +101,7 @@
     <div class=" w-5/4 p-2 mb-5 text-white">
         <div class="flex justify-center">
             <div class="cols-span-2 md:col-span-1">
-                <div class="bg-orange-700 rounded overflow-hidden shadow-lg md:flex md:items-center">
+                <div class="bg-blue-700 rounded overflow-hidden shadow-lg md:flex md:items-center">
                     <div class="sm:ml-2 relative w-full h-64 lg:w-64">
                         <img class="absolute top-0 left-0 w-full h-full object-cover" src="<?= base_url('assets') ?>/image/kepsek.png" alt="Image in frame">
                     </div>
@@ -124,7 +124,7 @@
 
     <div class="relative mt-10">
         <div class="fixed bottom-0">
-            <div class="bg-orange-500 w-screen text-white flex justify-center h-10"><?= date("Y"); ?> &copy; SMAN 1 Margaasih</div>
+            <div class="bg-blue-500 w-screen text-white flex justify-center h-10"><?= date("Y"); ?> &copy; SMAN 1 Margaasih</div>
         </div>
     </div>
 

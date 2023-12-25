@@ -14,7 +14,7 @@ class News extends Model
   protected $returnType       = 'array';
   protected $useSoftDeletes   = false;
   protected $protectFields    = true;
-  protected $allowedFields    = [];
+  protected $allowedFields    = ['id','title','author','content','status','img'];
 
   // Dates
   protected $useTimestamps = false;
@@ -37,14 +37,10 @@ class News extends Model
   protected $afterFind      = [];
   protected $beforeDelete   = [];
   protected $afterDelete    = [];
-  public function get_all_news()
-  {
-    // Buat query untuk mengambil semua data dari tabel news
-    $builder = $this->db->table($this->table);
-
-    // Jalankan query dan kembalikan hasilnya
-    return $builder->get()->getResult();
-  }
+  public function get_all()
+    {
+        return $this->findAll();
+    }
   public function getNewsSummary($id)
   {
     $builder = $this->db->table($this->table)

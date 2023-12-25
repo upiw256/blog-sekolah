@@ -26,7 +26,7 @@
       <p class="text-4xl font-bold">Nilai Statistik</p>
     </div>
 </div>
-<div class="bg-orange-700 text-white rounded-lg p-4 shadow-md m-3">
+<div class="bg-blue-700 text-white rounded-lg p-4 shadow-md m-3">
       <h2 class="text-2xl font-bold">SMAN 1 Margaasih</h2>
       <p class="text-xs font-thin text-red-400">*Yang terdata didapodik</p>
       <div class="flex flex-col">
