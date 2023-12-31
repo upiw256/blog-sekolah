@@ -32,10 +32,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
       width: 1px;
       white-space: normal;
     }
+
+    #loading {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      /* Warna hitam dengan tingkat transparansi */
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      text-align: center;
+    }
+
+    #loading .fa-spin {
+      color: #fff;
+      /* Warna ikon putar diatur menjadi putih */
+    }
   </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
+  <div id="loading">
+    <i class="fas fa-sync-alt fa-3x fa-spin"></i>
+  </div>
   <div class="wrapper">
 
     <!-- Navbar -->
@@ -232,11 +255,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       });
       // syncron
       $(".syncButton").on("click", function () {
+        showLoading()
         // Use AJAX to call the syncron function in the controller
         $.ajax({
           type: "POST",
           url: "<?php echo base_url('admin/syncron'); ?>",
           success: function (response) {
+            hideLoading();
             Toast.fire({
               icon: response.status,
               title: 'syncron ' + response.status,
@@ -245,7 +270,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             // console.log(response)
           },
           error: function (xhr, status, error) {
-            console.log(error)
+            console.log(xhr.responseJSON.message)
+            hideLoading();
             // Handle error
             Toast.fire({
               icon: status,
@@ -256,6 +282,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
       });
     });
+    function showLoading() {
+      // Menampilkan elemen loading (Anda dapat menyesuaikan dengan elemen atau tindakan yang sesuai)
+      document.getElementById('loading').style.display = 'block';
+    }
+
+    function hideLoading() {
+      // Menyembunyikan elemen loading
+      document.getElementById('loading').style.display = 'none';
+    }
   </script>
 </body>
 

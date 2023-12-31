@@ -2,11 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\RombonganBelajar;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\News;
 use App\Models\Siswa;
 use App\Models\Sekolah;
+use App\Models\Ptk;
 use App\Controllers\BaseController;
+use GuzzleHttp\Client;
 
 class Admin extends BaseController
 {
@@ -27,7 +30,6 @@ class Admin extends BaseController
                 'users' => $session->get('level'),
                 'menu' => 'menu',
                 'submenu' => 'home',
-                'syncron' => true,
             ];
         return view('dashboard/index', $data);
     }
@@ -57,20 +59,37 @@ class Admin extends BaseController
 
     public function syncron()
     {
+        $api_url = getenv('DAPODIK_URL');
+        $headers = [
+            'x-Barrier' => 'margaasih',
+        ];
+        $client = new Client();
+        $sekolahData = $client->request('GET', $api_url . '/sekolah', ['headers' => $headers]);
+        $siswaData = $client->request('GET', $api_url . '/siswa', ['headers' => $headers]);
+        $ptkData = $client->request('GET', $api_url . '/guru', ['headers' => $headers]);
+        $rombelData = $client->request('GET', $api_url . '/rombel', ['headers' => $headers]);
         $sekolahModel = new Sekolah();
         $siswaModel = new Siswa();
-        $sekolahData = $this->sekolah;
-        $siswaData = $this->siswa;
+        $ptkModel = new Ptk();
+        $rombelModel = new RombonganBelajar;
         $sekolah = json_decode($sekolahData->getBody(), true);
         $siswa = json_decode($siswaData->getBody(), true);
-        // dd($siswa['rows'][0]);
+        $ptk = json_decode($ptkData->getBody(), true);
+        $rombel = json_decode($rombelData->getBody(), true);
         $sekolahModel->truncate();
         $siswaModel->truncate();
+        $ptkModel->truncate();
+        $rombelModel->truncate();
         $result = $sekolahModel->insert($sekolah['rows']);
         foreach ($siswa['rows'] as $row) {
             $result = $siswaModel->insert($row);
         }
-        // Your syncron function logic here
+        foreach ($ptk['rows'] as $row) {
+            $result = $ptkModel->insert($row);
+        }
+        foreach ($rombel['rows'] as $row) {
+            $result = $rombelModel->insert($row);
+        }
         if ($result) {
             $response['status'] = 'success';
             $response['message'] = 'Data berhasil disimpan ke dalam database.';
