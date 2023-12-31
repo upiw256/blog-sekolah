@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use GuzzleHttp\Client;
 
 /**
  * Class BaseController
@@ -21,6 +22,7 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+    protected $sekolah = [];
     /**
      * Instance of the main Request object.
      *
@@ -49,5 +51,13 @@ abstract class BaseController extends Controller
 
         // $this->session = \Config\Services::session();
         // $this->nama="oke";
+        $api_url = getenv('DAPODIK_URL');
+        $headers = [
+            'x-Barrier' => 'margaasih',
+            // Tambahkan header sesuai kebutuhan
+        ];
+        $client = new Client();
+        $this->sekolah = $client->request('GET', $api_url . '/sekolah', ['headers' => $headers]);
+        $this->siswa = $client->request('GET', $api_url . '/siswa', ['headers' => $headers]);
     }
 }

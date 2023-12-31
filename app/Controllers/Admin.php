@@ -4,7 +4,11 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\News;
-class Admin extends ResourceController
+use App\Models\Siswa;
+use App\Models\Sekolah;
+use App\Controllers\BaseController;
+
+class Admin extends BaseController
 {
     /**
      * Return an array of resource objects, themselves in array format
@@ -14,53 +18,68 @@ class Admin extends ResourceController
     public function index()
     {
         $session = \Config\Services::session();
-        if ($session->get('logged_in')!==true) {
+        if ($session->get('logged_in') !== true) {
             return redirect()->to('/login');
         }
-        $data=  
-        [
-            'users'=>$session->get('level'),
-            'menu'=>'menu',
-            'submenu'=>'home'
-        ];
-        return view('dashboard/index',$data);
+
+        $data =
+            [
+                'users' => $session->get('level'),
+                'menu' => 'menu',
+                'submenu' => 'home',
+                'syncron' => true,
+            ];
+        return view('dashboard/index', $data);
     }
+
     public function news()
     {
         $delete = $this->request->getGet('delete');
         $newsModel = new News();
         $session = \Config\Services::session();
-        if ($session->get('logged_in')!==true) {
+        if ($session->get('logged_in') !== true) {
             return redirect()->to('/login');
         }
-        
-        $data=  
-        [
-            'users'=>$session->get('level'),
-            'menu'=>'menu',
-            'submenu'=>'news',
-            'news'=>$newsModel->get_all(),
-        ];
-        if ($delete!==null) {
+
+        $data =
+            [
+                'users' => $session->get('level'),
+                'menu' => 'menu',
+                'submenu' => 'news',
+                'news' => $newsModel->get_all(),
+            ];
+        if ($delete !== null) {
             $newsModel->delete(base64_decode($delete));
             return redirect()->to('/admin/news')->with('message', 'Data Berhasil di hapus');
         }
-        return view('dashboard/news',$data);
+        return view('dashboard/news', $data);
     }
-    
+
     public function syncron()
     {
-        $session = \Config\Services::session();
-        if ($session->get('logged_in')!==true) {
-            return redirect()->to('/login');
+        $sekolahModel = new Sekolah();
+        $siswaModel = new Siswa();
+        $sekolahData = $this->sekolah;
+        $siswaData = $this->siswa;
+        $sekolah = json_decode($sekolahData->getBody(), true);
+        $siswa = json_decode($siswaData->getBody(), true);
+        // dd($siswa['rows'][0]);
+        $sekolahModel->truncate();
+        $siswaModel->truncate();
+        $result = $sekolahModel->insert($sekolah['rows']);
+        foreach ($siswa['rows'] as $row) {
+            $result = $siswaModel->insert($row);
         }
-        $data=  
-        [
-            'users'=>$session->get('level'),
-            'menu'=>'menu',
-            'submenu'=>'news'
-        ];
-        return view('dashboard/news',$data);
+        // Your syncron function logic here
+        if ($result) {
+            $response['status'] = 'success';
+            $response['message'] = 'Data berhasil disimpan ke dalam database.';
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Gagal menyimpan data ke dalam database.';
+        }
+
+        return $this->response->setJSON($response);
     }
 
     /**
@@ -80,7 +99,7 @@ class Admin extends ResourceController
      */
     public function new()
     {
-        
+
     }
 
     /**
@@ -100,25 +119,25 @@ class Admin extends ResourceController
      */
     public function edit($id = null)
     {
-        
+
         $session = \Config\Services::session();
-        if ($session->get('logged_in')!==true) {
+        if ($session->get('logged_in') !== true) {
             return redirect()->to('/login');
         }
         $newsModel = new News();
-        $hasil= base64_decode($id);
+        $hasil = base64_decode($id);
         // Dapatkan data berita yang akan ditampilkan
         $data = [
-            'news'=>$newsModel->getNewsSummary($hasil),
-            'menu'=>'menu',
-            'submenu'=>'news',
-            'users'=>$session->get('level'),
-            
+            'news' => $newsModel->getNewsSummary($hasil),
+            'menu' => 'menu',
+            'submenu' => 'news',
+            'users' => $session->get('level'),
+
         ];
 
         // Tampilkan view
         if (!$data['news']) {
-        return view('errors/404');
+            return view('errors/404');
         }
         return view('dashboard/edit_news', $data);
     }
@@ -131,7 +150,7 @@ class Admin extends ResourceController
     public function update($id = null)
     {
         $session = \Config\Services::session();
-        if ($session->get('logged_in')!==true) {
+        if ($session->get('logged_in') !== true) {
             return redirect()->to('/login');
         }
         $file = $this->request->getFile('img');
@@ -139,31 +158,31 @@ class Admin extends ResourceController
         $title = $this->request->getVar("title");
         $content = $this->request->getVar("content");
         $fileSize = $file->getSize();
-        if($fileSize > 2 * 1024 * 1024) {
-        // Ukuran file lebih dari 2MB
-        // Tampilkan pesan error atau redirect ke halaman yang sesuai
-        return redirect()->to('/admin/news')->with('error', 'Ukuran file maksimal 2MB');
+        if ($fileSize > 2 * 1024 * 1024) {
+            // Ukuran file lebih dari 2MB
+            // Tampilkan pesan error atau redirect ke halaman yang sesuai
+            return redirect()->to('/admin/news')->with('error', 'Ukuran file maksimal 2MB');
         }
         // Mendapatkan tipe file
         $fileType = $file->getMimeType();
         // Memverifikasi bahwa file yang diupload hanya merupakan gambar saja
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        if(!in_array($fileType, $allowedTypes)) {
-        // Tipe file yang diupload bukan gambar
-        // Tampilkan pesan error atau redirect ke halaman yang sesuai
-        return redirect()->to('/admin/news')->with('error', 'Hanya file gambar yang diperbolehkan');
+        if (!in_array($fileType, $allowedTypes)) {
+            // Tipe file yang diupload bukan gambar
+            // Tampilkan pesan error atau redirect ke halaman yang sesuai
+            return redirect()->to('/admin/news')->with('error', 'Hanya file gambar yang diperbolehkan');
         }
         $fileName = $file->getRandomName();
         $file->move(ROOTPATH . 'public/assets/image/upload/', $fileName);
-        
+
         // code untuk menyimpan informasi file ke dalam database
         $newsModel = new News();
         $newsModel->table('news')->set([
-        'title' => $title,
-        'author' => $author,
-        'content'=> trim($content),
-        'img' => $fileName
-        ])->where('id',$id);
+            'title' => $title,
+            'author' => $author,
+            'content' => trim($content),
+            'img' => $fileName
+        ])->where('id', $id);
         $newsModel->update();
         // redirect ke halaman yang sesuai
         return redirect()->to('/admin/news')->with('message', 'Data Berhasil di tambah');
@@ -176,6 +195,6 @@ class Admin extends ResourceController
      */
     public function delete($id = null)
     {
-        
+
     }
 }
