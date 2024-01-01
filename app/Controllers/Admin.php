@@ -24,12 +24,25 @@ class Admin extends BaseController
         if ($session->get('logged_in') !== true) {
             return redirect()->to('/login');
         }
-
+        $siswa = new Siswa;
+        $jumlahSiswa = $siswa->countAllResults();
+        $ptk = new Ptk;
+        $jumlahPtk = $ptk->countAllResults();
+        $kelas = new RombonganBelajar;
+        $jumlahKelas = $kelas->like('jenis_rombel_str', 'kelas', 'after')->countAllResults();
+        $news = new News;
+        $jumlahNews = $news->countAllResults();
+        $berita = $news->limit(3)->orderBy('id', 'DESC')->get()->getResult();
         $data =
             [
                 'users' => $session->get('level'),
                 'menu' => 'menu',
                 'submenu' => 'home',
+                'siswa' => $jumlahSiswa,
+                'ptk' => $jumlahPtk,
+                'kelas' => $jumlahKelas,
+                'news' => $jumlahNews,
+                'update' => $berita,
             ];
         return view('dashboard/index', $data);
     }
