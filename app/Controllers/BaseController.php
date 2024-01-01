@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
+
 /**
  * Class BaseController
  *
@@ -21,6 +22,7 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+    protected $sekolah = [];
     /**
      * Instance of the main Request object.
      *
@@ -49,5 +51,6 @@ abstract class BaseController extends Controller
 
         // $this->session = \Config\Services::session();
         // $this->nama="oke";
+        
     }
 }
