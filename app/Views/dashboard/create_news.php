@@ -21,18 +21,18 @@ $this->section('admin'); ?>
         </div><!-- /.container-fluid -->
     </div>
     <div class="p-3">
-        <form action="<?= base_url('/news/save') ?>" method="post">
+        <form method="post" enctype="multipart/form-data" id="uploadNews">
             <div class="form-group">
                 <label for="exampleFormControlInput1">Title</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                <input type="text" class="form-control" id="exampleFormControlInput1" name="title" placeholder="Title">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Content</label>
-                <textarea id="summernote" name="editordata"></textarea>
+                <textarea id="summernote" name="content"></textarea>
             </div>
             <div class="input-group mb-3">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="imageFile" onchange="tampilkanGambar()" accept="image/*">
+                    <input type="file" class="custom-file-input" name="image" id="imageFile" onchange="tampilkanGambar()" accept="image/*">
                     <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                 </div>
             </div>
@@ -41,7 +41,7 @@ $this->section('admin'); ?>
                 <img src="" alt="Pratinjau Gambar" class="img-thumbnail" id="previewImage" style="width: 300px; height: 200px;">
             </div>
             <div class="form-group">
-                <input type="submit" value="Simpan" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary saveNews">Simpan</button>
             </div>
         </form>
     </div>
@@ -52,6 +52,7 @@ $this->section('admin'); ?>
         var input = document.getElementById('imageFile');
         var previewContainer = document.getElementById('previewContainer');
         var previewImage = document.getElementById('previewImage');
+        var customFileLabel = document.querySelector('.custom-file-label');
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -64,6 +65,7 @@ $this->section('admin'); ?>
             }
 
             reader.readAsDataURL(input.files[0]);
+            customFileLabel.innerHTML = input.files[0].name;
         }
     }
 </script>

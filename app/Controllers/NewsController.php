@@ -38,6 +38,41 @@ class NewsController extends BaseController
             ];
         return view('/dashboard/create_news', $data);
     }
+    public function post()
+    {
+        $response = [];
+        helper(['form', 'url']);
+        $newsModel = new News();
+        $session = \Config\Services::session();
+        $file = $this->request->getFile('image');
+        $title = $this->request->getPost('title');
+        $content = $this->request->getPost('content');
+        // dd($content);
+        $rules = [
+            'image' => 'uploaded[image]|max_size[image,1024]|is_image[image]',
+        ];
+        if ($this->validate($rules)) {
+
+            // Pindahkan file ke direktori yang diinginkan (misalnya, writable/uploads/)
+            $file->move(WRITEPATH . 'uploads');
+            // dd($file->getRealPath());
+            // Simpan nama file ke database
+            $data = [
+                'img' => $file->getName(),
+                'title' => $title,
+                'author' => $session->get('username'),
+                'content' => $content,
+            ];
+
+            $newsModel->insert($data);
+            $response['success'] = true;
+            $response['message'] = 'Gambar berhasil diunggah.';
+        } else {
+            $response['success'] = false;
+            $response['errors'] = $this->validator->listErrors();
+        }
+        return $this->response->setJSON($response);
+    }
     public function edit($id = null)
     {
 

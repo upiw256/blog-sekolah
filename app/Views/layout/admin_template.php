@@ -283,6 +283,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
           }
         });
       });
+      //upload
+      $(".saveNews").on("click", function() {
+        $('#uploadForm').submit(function(e) {
+          e.preventDefault();
+
+          $.ajax({
+            url: '/admin/news/post',
+            type: 'post',
+            dataType: 'json',
+            data: new FormData(this),
+            // processData: false,
+            // contentType: false,
+            success: function(response) {
+              if (response.success) {
+                // Toast berhasil
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: response.message,
+                });
+              } else {
+                // Toast gagal
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal',
+                  text: response.errors.join('<br>'),
+                });
+                console.log(response.errors)
+              }
+            },
+            error: function(xhr, status, error) {
+              // Toast gagal (terjadi kesalahan)
+              Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: xhr.responseJSON.message
+              });
+            }
+          });
+        });
+      });
     });
 
     function showLoading() {
@@ -294,6 +335,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       // Menyembunyikan elemen loading
       document.getElementById('loading').style.display = 'none';
     }
+
     $(document).ready(function() {
       $('#summernote').summernote({
         placeholder: 'Tulis di sini...',
