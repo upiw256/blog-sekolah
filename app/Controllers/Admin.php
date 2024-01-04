@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\RombonganBelajar;
+
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\News;
 use App\Models\Siswa;
@@ -24,15 +24,15 @@ class Admin extends BaseController
         if ($session->get('logged_in') !== true) {
             return redirect()->to('/login');
         }
-        $siswa = new Siswa;
-        $jumlahSiswa = $siswa->countAllResults();
-        $ptk = new Ptk;
-        $jumlahPtk = $ptk->countAllResults();
-        $kelas = new RombonganBelajar;
-        $jumlahKelas = $kelas->like('jenis_rombel_str', 'kelas', 'after')->countAllResults();
-        $news = new News;
-        $jumlahNews = $news->countAllResults();
-        $berita = $news->limit(3)->orderBy('id', 'DESC')->get()->getResult();
+        // $siswa = new Siswa;
+        $jumlahSiswa = $this->siswa->countAllResults();
+        // $ptk = new Ptk;
+        $jumlahPtk = $this->ptk->countAllResults();
+        // $kelas = new RombonganBelajar;
+        $jumlahKelas = $this->kelas->like('jenis_rombel_str', 'kelas', 'after')->countAllResults();
+        // $news = new News;
+        $jumlahNews = $this->news->countAllResults();
+        $berita = $this->news->limit(3)->orderBy('id', 'DESC')->get()->getResult();
         $data =
             [
                 'users' => $session->get('level'),
@@ -81,27 +81,24 @@ class Admin extends BaseController
         $siswaData = $client->request('GET', $api_url . '/siswa', ['headers' => $headers]);
         $ptkData = $client->request('GET', $api_url . '/guru', ['headers' => $headers]);
         $rombelData = $client->request('GET', $api_url . '/rombel', ['headers' => $headers]);
-        $sekolahModel = new Sekolah();
-        $siswaModel = new Siswa();
-        $ptkModel = new Ptk();
-        $rombelModel = new RombonganBelajar;
+
         $sekolah = json_decode($sekolahData->getBody(), true);
         $siswa = json_decode($siswaData->getBody(), true);
         $ptk = json_decode($ptkData->getBody(), true);
         $rombel = json_decode($rombelData->getBody(), true);
-        $sekolahModel->truncate();
-        $siswaModel->truncate();
-        $ptkModel->truncate();
-        $rombelModel->truncate();
-        $result = $sekolahModel->insert($sekolah['rows']);
+        $this->sekolah->truncate();
+        $this->siswa->truncate();
+        $this->ptk->truncate();
+        $this->kelas->truncate();
+        $result = $this->sekolah->insert($sekolah['rows']);
         foreach ($siswa['rows'] as $row) {
-            $result = $siswaModel->insert($row);
+            $result = $this->siswa->insert($row);
         }
         foreach ($ptk['rows'] as $row) {
-            $result = $ptkModel->insert($row);
+            $result = $this->ptk->insert($row);
         }
         foreach ($rombel['rows'] as $row) {
-            $result = $rombelModel->insert($row);
+            $result = $this->kelas->insert($row);
         }
         if ($result) {
             $response['status'] = 'success';

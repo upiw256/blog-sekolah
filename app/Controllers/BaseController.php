@@ -8,7 +8,11 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
-
+use App\Models\News;
+use App\Models\Siswa;
+use App\Models\Sekolah;
+use App\Models\Ptk;
+use App\Models\RombonganBelajar;
 
 /**
  * Class BaseController
@@ -51,6 +55,10 @@ abstract class BaseController extends Controller
 
         // $this->session = \Config\Services::session();
         // $this->nama="oke";
-        
+        $this->siswa = new Siswa;
+        $this->ptk = new Ptk;
+        $this->news = new News;
+        $this->sekolah = new Sekolah;
+        $this->kelas = new RombonganBelajar;
     }
 }

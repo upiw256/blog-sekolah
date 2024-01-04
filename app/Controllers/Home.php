@@ -2,16 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Models\News;
-
 class Home extends BaseController
 {
   public function index()
   {
-    $news = new News();
     $data = [
-      'news' => $news->paginate(2),
-      'pager' => $news->pager,
+      'news' => $this->news->paginate(2),
+      'pager' => $this->news->pager,
     ];
     // dd($data);
     return view('home/home', $data);
@@ -19,10 +16,9 @@ class Home extends BaseController
   public function read($id)
   {
     // Buat instance dari model NewsModel
-    $newsModel = new News();
 
     // Dapatkan data berita yang akan ditampilkan
-    $data['news'] = $newsModel->getNewsSummary($id);
+    $data['news'] = $this->news->getNewsSummary($id);
 
     // Tampilkan view
     if (!$data['news']) {
@@ -32,14 +28,12 @@ class Home extends BaseController
   }
   public function search_ajax()
   {
-    $news = new News();
-    $news = $news;
     $keyword = $this->request->getVar();
-    $array = (object)$news->search($keyword);
+    $array = $this->news->search($keyword);
 
     $data = [
       'news' => $array,
-      'pager' => $news->pager,
+      'pager' => $this->news->pager,
     ];
     return view('home/home', $data);
   }
