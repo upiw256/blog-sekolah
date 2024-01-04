@@ -28,7 +28,7 @@ $this->section('admin'); ?>
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <a href="<?= base_url('/admin/news') ?>" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</a>
+              <a href="<?= base_url('/admin/news/create') ?>" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -46,8 +46,8 @@ $this->section('admin'); ?>
                 <tbody>
                   <?php
                   // dd($news);
-                  foreach ($news as $n):
-                    ?>
+                  foreach ($news as $n) :
+                  ?>
                     <tr>
                       <td class="fitwidth">
                         <?= substr($n['title'], 0, 20) ?>
