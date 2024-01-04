@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use GuzzleHttp\Client;
 
 class Data extends BaseController
 {
@@ -16,6 +15,5 @@ class Data extends BaseController
             'sekolah' => $this->sekolah->first(),
         ];
         return view('layout/fix', $data);
-
     }
 }

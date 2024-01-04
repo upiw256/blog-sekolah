@@ -14,9 +14,7 @@
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- pendor CSS Files -->
     <link href="assets/pendor/aos/aos.css" rel="stylesheet">
@@ -41,10 +39,10 @@
         /* .swiper-slide {
             margin-left: 80px;
         } */
-        .news {
+        /* .news {
             height: 30rem;
             width: 25rem;
-        }
+        } */
 
         .btn-primary {
             background-color: #FFC451 !important;
@@ -57,20 +55,20 @@
             border-color: #FFC451 !important;
         }
 
+        /* 
         .swiper-container {
             width: 100%;
             height: 100%;
-        }
+        } */
 
-        .swiper-slide {
+        /* .swiper-slide {
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: aqua;
-            /* font-size: 24px;
-            margin: 20px; */
-        }
+            font-size: 24px;
+            margin: 20px;
+        } */
 
         .card {
             height: 30rem;
@@ -81,26 +79,31 @@
             height: 30%;
         }
 
-        .swiper {
-            margin: 10px;
-            /* Ubah nilai sesuai kebutuhan Anda */
+        .putih {
+            background-color: white;
+            padding-left: 10px;
         }
+
+        /* .swiper {
+            margin: 10px;
+            Ubah nilai sesuai kebutuhan Anda
+        } */
 
 
         /* Media query untuk ukuran hp */
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             .swiper-slide {
                 font-size: 16px;
-                /* Menyesuaikan ukuran teks untuk layar kecil */
+                Menyesuaikan ukuran teks untuk layar kecil
             }
-        }
+        } */
     </style>
 </head>
 
 <body>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top ">
+    <header id="header" class="fixed-top z-3">
         <div class="container d-flex align-items-center justify-content-lg-between">
 
             <h1 class="logo me-auto me-lg-0"><a href="index.html">M<span>.</span>G<span>.</span>A</a></h1>
@@ -203,8 +206,7 @@
                     <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
                         <img src="assets/img/about.jpg" class="img-fluid" alt="">
                     </div>
-                    <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right"
-                        data-aos-delay="100">
+                    <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
                         <h3>Sejarah singkat SMAN 1 Margaasih</h3>
                         <p class="fst-italic">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -235,91 +237,96 @@
         <!-- ======= Clients Section ======= -->
         <section id="clients" class="clients">
             <div class="container" data-aos="zoom-in">
-                <h3>News Update</h3>
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <!-- Isi swiper slides di sini -->
-                        <?php foreach ($allNews as $item): ?>
+                <div class="row">
 
-                            <div class="swiper-slide">
-                                <div class="card">
-                                    <img src="<?= $item['img'] ?>" class="card-img-top img-fluid" alt="Placeholder Image">
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            <?= $item['title'] ?>
-                                        </h5>
-                                        <p class="card-text">
-                                            <?= $item['content'] ?>
-                                        </p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <div class="col-3">
+                        <div class="h3">News Update</div>
+                    </div>
+                    <div class="col-9">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search News" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-primary" type="button" id="button-addon2"><i class='bx bx-search-alt-2'></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 ">
+                    <div class="swiper-container">
+                        <!-- Isi swiper slides di sini -->
+                        <div class="swiper-wrapper">
+                            <?php foreach ($allNews as $item) : ?>
+                                <div class="swiper-slide">
+                                    <div class="card" style="height: 500px;">
+                                        <img src="<?= $item['img'] ?>" class="card-img-top img-fluid" alt="Placeholder Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <?= $item['title'] ?>
+                                            </h5>
+                                            <p class="card-text">
+                                                <?= $item['content'] ?>
+                                            </p>
+                                        </div>
+                                        <div class="card-footer text-right">
+                                            <a href="#" class="btn btn-primary">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach ?>
+                            <?php endforeach ?>
+                        </div>
                         <!-- Tambahkan tombol navigasi jika diinginkan -->
                     </div>
-
                 </div>
         </section><!-- End Clients Section -->
 
         <!-- ======= Features Section ======= -->
         <section id="features" class="features">
-            <div class="container" data-aos="fade-up">
-                <h3>Galery Sekolah</h3>
-
-                <div class="row">
-                    <!-- <div class="image col-lg-6" style='background-image: url("assets/img/features.jpg");' data-aos="fade-right"></div> -->
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <iframe width="800" height="400"
-                                    src="https://www.youtube-nocookie.com/embed/0L_BfGdS-Ts?si=QTo0bi1a9UVZKVBh"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
+            <div class="row">
+                <!-- Kolom 1: Text -->
+                <div class="col-12 col-sm-6 putih z-2">
+                    <div class="container">
+                        <div class="col-lg-6 mt-5" data-aos="fade-left" data-aos-delay="100">
+                            <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
+                                <i class="bx bx-receipt"></i>
+                                <h4>Visi</h4>
+                                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
                             </div>
-                            <div class="swiper-slide">
-                                <iframe width="800" height="400"
-                                    src="https://www.youtube.com/embed/f6QUiHJDAd0?si=t7RNRLC0x6tyuM5C"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
+                            <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+                                <i class="bx bx-cube-alt"></i>
+                                <h4>Misi</h4>
+                                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
                             </div>
-                            <div class="swiper-slide">
-                                <iframe width="800" height="400"
-                                    src="https://www.youtube-nocookie.com/embed/JWBnyZySqkE?si=apLNKqq9gmL7DePG"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
+                            <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+                                <i class="bx bx-images"></i>
+                                <h4>Selogan</h4>
+                                <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
                             </div>
-                            <!-- Add more slides as needed -->
-                        </div>
-                        <!-- Add Pagination -->
-                    </div>
-                    <div class="col-lg-6 mt-5" data-aos="fade-left" data-aos-delay="100">
-                        <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
-                            <i class="bx bx-receipt"></i>
-                            <h4>Visi</h4>
-                            <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
-                        </div>
-                        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
-                            <i class="bx bx-cube-alt"></i>
-                            <h4>Misi</h4>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-                        </div>
-                        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
-                            <i class="bx bx-images"></i>
-                            <h4>Selogan</h4>
-                            <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
-                        </div>
-                        <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
-                            <i class="bx bx-shield"></i>
-                            <h4>Beatae veritatis</h4>
-                            <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                            <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
+                                <i class="bx bx-shield"></i>
+                                <h4>Beatae veritatis</h4>
+                                <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Kolom 2: Swiper -->
+                <div class="col-12 col-sm-6 ps-5">
+                    <h1>Galery</h1>
+                    <div class="swiper-container" style="height: 300px;">
+                        <div class="swiper-wrapper">
+                            <!-- Isi slide swiper di sini -->
+                            <div class="swiper-slide">
+                                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0L_BfGdS-Ts?si=O8CAkSbgEY4jwfwv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="swiper-slide">
+                                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/f6QUiHJDAd0?si=YsNe6jK1Env6Xhsn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="swiper-slide">
+                                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/JWBnyZySqkE?si=92AZWUw5-h7YYzB-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <!-- Tambahkan slide sesuai kebutuhan -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </section><!-- End Features Section -->
 
@@ -341,8 +348,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
-                        data-aos-delay="200">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-file"></i></div>
                             <h4><a href="">Sed ut perspiciatis</a></h4>
@@ -350,8 +356,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in"
-                        data-aos-delay="300">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-tachometer"></i></div>
                             <h4><a href="">Magni Dolores</a></h4>
@@ -359,8 +364,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in"
-                        data-aos-delay="100">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-world"></i></div>
                             <h4><a href="">Nemo Enim</a></h4>
@@ -368,8 +372,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in"
-                        data-aos-delay="200">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-slideshow"></i></div>
                             <h4><a href="">Dele cardo</a></h4>
@@ -377,8 +380,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in"
-                        data-aos-delay="300">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-arch"></i></div>
                             <h4><a href="">Divera don</a></h4>
@@ -441,8 +443,7 @@
                                 <h4>App 1</h4>
                                 <p>App</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -456,8 +457,7 @@
                                 <h4>Web 3</h4>
                                 <p>Web</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -471,8 +471,7 @@
                                 <h4>App 2</h4>
                                 <p>App</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -486,8 +485,7 @@
                                 <h4>Card 2</h4>
                                 <p>Card</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -501,8 +499,7 @@
                                 <h4>Web 2</h4>
                                 <p>Web</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -516,8 +513,7 @@
                                 <h4>App 3</h4>
                                 <p>App</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -531,8 +527,7 @@
                                 <h4>Card 1</h4>
                                 <p>Card</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -546,8 +541,7 @@
                                 <h4>Card 3</h4>
                                 <p>Card</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -561,8 +555,7 @@
                                 <h4>Web 3</h4>
                                 <p>Web</p>
                                 <div class="portfolio-links">
-                                    <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery"
-                                        class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
+                                    <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
                                     <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -579,10 +572,8 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="row no-gutters">
-                    <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start"
-                        data-aos="fade-right" data-aos-delay="100"></div>
-                    <div class="col-xl-7 ps-4 ps-lg-5 pe-4 pe-lg-1 d-flex align-items-stretch" data-aos="fade-left"
-                        data-aos-delay="100">
+                    <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right" data-aos-delay="100"></div>
+                    <div class="col-xl-7 ps-4 ps-lg-5 pe-4 pe-lg-1 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
                         <div class="content d-flex flex-column justify-content-center">
                             <h3>Profile Kepla Sekolah</h3>
                             <p>
@@ -593,8 +584,7 @@
                                 <div class="col-md-6 d-md-flex align-items-md-stretch">
                                     <div class="count-box">
                                         <i class="bi bi-emoji-smile"></i>
-                                        <span data-purecounter-start="0" data-purecounter-end="65"
-                                            data-purecounter-duration="2" class="purecounter"></span>
+                                        <span data-purecounter-start="0" data-purecounter-end="65" data-purecounter-duration="2" class="purecounter"></span>
                                         <p><strong>Happy Clients</strong> consequuntur voluptas nostrum aliquid ipsam
                                             architecto ut.</p>
                                     </div>
@@ -603,8 +593,7 @@
                                 <div class="col-md-6 d-md-flex align-items-md-stretch">
                                     <div class="count-box">
                                         <i class="bi bi-journal-richtext"></i>
-                                        <span data-purecounter-start="0" data-purecounter-end="85"
-                                            data-purecounter-duration="2" class="purecounter"></span>
+                                        <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="2" class="purecounter"></span>
                                         <p><strong>Projects</strong> adipisci atque cum quia aspernatur totam laudantium
                                             et quia dere tan</p>
                                     </div>
@@ -613,8 +602,7 @@
                                 <div class="col-md-6 d-md-flex align-items-md-stretch">
                                     <div class="count-box">
                                         <i class="bi bi-clock"></i>
-                                        <span data-purecounter-start="0" data-purecounter-end="35"
-                                            data-purecounter-duration="4" class="purecounter"></span>
+                                        <span data-purecounter-start="0" data-purecounter-end="35" data-purecounter-duration="4" class="purecounter"></span>
                                         <p><strong>Years of experience</strong> aut commodi quaerat modi aliquam nam
                                             ducimus aut voluptate non vel</p>
                                     </div>
@@ -623,8 +611,7 @@
                                 <div class="col-md-6 d-md-flex align-items-md-stretch">
                                     <div class="count-box">
                                         <i class="bi bi-award"></i>
-                                        <span data-purecounter-start="0" data-purecounter-end="20"
-                                            data-purecounter-duration="4" class="purecounter"></span>
+                                        <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="4" class="purecounter"></span>
                                         <p><strong>Awards</strong> rerum asperiores dolor alias quo reprehenderit eum et
                                             nemo pad der</p>
                                     </div>
@@ -751,9 +738,7 @@
                 </div>
 
                 <div>
-                    <iframe style="border:0; width: 100%; height: 270px;"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.3226338560617!2d<?= $sekolah['bujur'] ?>!3d<?= $sekolah['lintang'] ?>!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef1fc525d5cf%3A0x17d04e35507b0d42!2sSMAN%201%20Margaasih!5e0!3m2!1sid!2sid!4v1703694859117!5m2!1sid!2sid"
-                        frameborder="0" allowfullscreen></iframe>
+                    <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.3226338560617!2d<?= $sekolah['bujur'] ?>!3d<?= $sekolah['lintang'] ?>!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef1fc525d5cf%3A0x17d04e35507b0d42!2sSMAN%201%20Margaasih!5e0!3m2!1sid!2sid!4v1703694859117!5m2!1sid!2sid" frameborder="0" allowfullscreen></iframe>
                 </div>
 
                 <div class="row mt-5">
@@ -793,21 +778,17 @@
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Your Name" required>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                                 </div>
                                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Your Email" required>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="Subject" required>
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
                             </div>
                             <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="5" placeholder="Message"
-                                    required></textarea>
+                                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
@@ -901,8 +882,7 @@
     </footer><!-- End Footer -->
 
     <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- pendor JS Files -->
     <script src="assets/pendor/purecounter/purecounter_vanilla.js"></script>
@@ -927,8 +907,9 @@
                 delay: 3000, // Delay between slides in milliseconds (3 seconds in this example)
                 disableOnInteraction: false,
             },
+            loop: true,
         });
-        window.addEventListener('orientationchange', function () {
+        window.addEventListener('orientationchange', function() {
             swiper.destroy();
             swiper = new Swiper('.swiper-container', {
                 slidesPerView: 1,

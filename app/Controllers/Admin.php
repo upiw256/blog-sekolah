@@ -3,11 +3,7 @@
 namespace App\Controllers;
 
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\News;
-use App\Models\Siswa;
-use App\Models\Sekolah;
-use App\Models\Ptk;
 use App\Controllers\BaseController;
 use GuzzleHttp\Client;
 
@@ -128,7 +124,6 @@ class Admin extends BaseController
      */
     public function new()
     {
-
     }
 
     /**
@@ -224,6 +219,5 @@ class Admin extends BaseController
      */
     public function delete($id = null)
     {
-
     }
 }
