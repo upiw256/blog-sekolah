@@ -38,8 +38,12 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
     <style>
-        .swiper-slide {
+        /* .swiper-slide {
             margin-left: 80px;
+        } */
+        .news {
+            height: 30rem;
+            width: 25rem;
         }
 
         .btn-primary {
@@ -51,6 +55,44 @@
             color: black !important;
             background-color: #FFC451 !important;
             border-color: #FFC451 !important;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: aqua;
+            /* font-size: 24px;
+            margin: 20px; */
+        }
+
+        .card {
+            height: 30rem;
+            width: 100%;
+        }
+
+        .card img {
+            height: 30%;
+        }
+
+        .swiper {
+            margin: 10px;
+            /* Ubah nilai sesuai kebutuhan Anda */
+        }
+
+
+        /* Media query untuk ukuran hp */
+        @media (max-width: 768px) {
+            .swiper-slide {
+                font-size: 16px;
+                /* Menyesuaikan ukuran teks untuk layar kecil */
+            }
         }
     </style>
 </head>
@@ -69,8 +111,11 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+                    <li><a class="nav-link scrollto" href="#clients">News</a></li>
+                    <li><a class="nav-link scrollto" href="#features">Galery</a></li>
+                    <li><a class="nav-link scrollto" href="#services">Ekstra kulikuler</a></li>
+                    <li><a class="nav-link scrollto" href="#cta">Data Guru</a></li>
+                    <li><a class="nav-link scrollto " href="#portfolio">Achievement</a></li>
                     <li><a class="nav-link scrollto" href="#team">Team</a></li>
                     <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
@@ -93,8 +138,6 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-
-            <a href="#about" class="get-started-btn scrollto">Get Started</a>
 
         </div>
     </header><!-- End Header -->
@@ -147,7 +190,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section><!-- End Hero -->
 
@@ -194,71 +236,30 @@
         <section id="clients" class="clients">
             <div class="container" data-aos="zoom-in">
                 <h3>News Update</h3>
-                <div class="clients-slider swiper">
-                    <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://placehold.it/300x200" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 1</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://placehold.it/300x200" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 2</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://placehold.it/300x200" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 3</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://placehold.it/300x200" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 4</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://placehold.it/300x200" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title 5</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="d-md-flex justify-content-md-end">
-                        <a class="btn btn-warning btn-left text-light" href="#">More News</a>
-                    </div>
-                </div>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Isi swiper slides di sini -->
+                        <?php foreach ($allNews as $item): ?>
 
-            </div>
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <img src="<?= $item['img'] ?>" class="card-img-top img-fluid" alt="Placeholder Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <?= $item['title'] ?>
+                                        </h5>
+                                        <p class="card-text">
+                                            <?= $item['content'] ?>
+                                        </p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+                        <!-- Tambahkan tombol navigasi jika diinginkan -->
+                    </div>
+
+                </div>
         </section><!-- End Clients Section -->
 
         <!-- ======= Features Section ======= -->
@@ -271,20 +272,31 @@
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="https://placehold.it/800x400" alt="Slide 1">
+                                <iframe width="800" height="400"
+                                    src="https://www.youtube-nocookie.com/embed/0L_BfGdS-Ts?si=QTo0bi1a9UVZKVBh"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
                             </div>
                             <div class="swiper-slide">
-                                <img src="https://placehold.it/800x400" alt="Slide 2">
+                                <iframe width="800" height="400"
+                                    src="https://www.youtube.com/embed/f6QUiHJDAd0?si=t7RNRLC0x6tyuM5C"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
                             </div>
                             <div class="swiper-slide">
-                                <img src="https://placehold.it/800x400" alt="Slide 3">
+                                <iframe width="800" height="400"
+                                    src="https://www.youtube-nocookie.com/embed/JWBnyZySqkE?si=apLNKqq9gmL7DePG"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
                             </div>
                             <!-- Add more slides as needed -->
                         </div>
                         <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
                     </div>
-                    <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+                    <div class="col-lg-6 mt-5" data-aos="fade-left" data-aos-delay="100">
                         <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
                             <i class="bx bx-receipt"></i>
                             <h4>Visi</h4>
@@ -316,15 +328,15 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Services</h2>
-                    <p>Check our Services</p>
+                    <h2>Extracurricular</h2>
+                    <p>Check our extracurricular</p>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                            <h4><a href="">Lorem Ipsum</a></h4>
+                            <h4><a href="">Basket ball</a></h4>
                             <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                         </div>
                     </div>
@@ -384,11 +396,17 @@
             <div class="container" data-aos="zoom-in">
 
                 <div class="text-center">
-                    <h3>Call To Action</h3>
-                    <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                        mollit anim id est laborum.</p>
-                    <a class="cta-btn" href="#">Call To Action</a>
+                    <h3>Data Guru</h3>
+                    <p>
+                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                        Jangan setengah hati menjadi guru, karena anak didik kita telah membuka sepenuh hatinya.
+                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                    </p>
+                    <p>
+
+                        - Ki Hajar Dewantara
+                    </p>
+                    <a class="cta-btn" href="#">Buka Data</a>
                 </div>
 
             </div>
@@ -399,8 +417,8 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Portfolio</h2>
-                    <p>Check our Portfolio</p>
+                    <h2>Achievement</h2>
+                    <p>Check our achievement</p>
                 </div>
 
                 <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -734,7 +752,7 @@
 
                 <div>
                     <iframe style="border:0; width: 100%; height: 270px;"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.3226338560617!2d107.54622947499695!3d-6.971211193029415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef1fc525d5cf%3A0x17d04e35507b0d42!2sSMAN%201%20Margaasih!5e0!3m2!1sid!2sid!4v1703694859117!5m2!1sid!2sid"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.3226338560617!2d<?= $sekolah['bujur'] ?>!3d<?= $sekolah['lintang'] ?>!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ef1fc525d5cf%3A0x17d04e35507b0d42!2sSMAN%201%20Margaasih!5e0!3m2!1sid!2sid!4v1703694859117!5m2!1sid!2sid"
                         frameborder="0" allowfullscreen></iframe>
                 </div>
 
@@ -745,19 +763,25 @@
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
                                 <h4>Location:</h4>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <p>
+                                    <?= $sekolah['alamat_jalan'] . " RT." . $sekolah['rt'] . " RW." . $sekolah['rw'] . " Desa " . $sekolah['desa_kelurahan'] . " " . $sekolah['kecamatan'] . " " . $sekolah['kabupaten_kota'] ?>
+                                </p>
                             </div>
 
                             <div class="email">
                                 <i class="bi bi-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>info@example.com</p>
+                                <p>
+                                    <?= $sekolah['email'] ?>
+                                </p>
                             </div>
 
                             <div class="phone">
                                 <i class="bi bi-phone"></i>
                                 <h4>Call:</h4>
-                                <p>+1 5589 55488 55s</p>
+                                <p>
+                                    <?= $sekolah['nomor_telepon'] ?>
+                                </p>
                             </div>
 
                         </div>
@@ -903,6 +927,21 @@
                 delay: 3000, // Delay between slides in milliseconds (3 seconds in this example)
                 disableOnInteraction: false,
             },
+        });
+        window.addEventListener('orientationchange', function () {
+            swiper.destroy();
+            swiper = new Swiper('.swiper-container', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000, // Delay between slides in milliseconds (3 seconds in this example)
+                    disableOnInteraction: false,
+                },
+            });
         });
     </script>
 
