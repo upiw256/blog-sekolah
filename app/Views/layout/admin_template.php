@@ -14,8 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <base href="<?= base_url('assets') ?>/">
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -24,6 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel='shorcut icon' href="<?= base_url('assets') ?>/image/logo.png">
@@ -101,8 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">SMAN 1 Margaasih</span>
       </a>
 
@@ -226,9 +225,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+  <script src="plugins/summernote/summernote-bs4.min.js"></script>
   <script src="plugins/toastr/toastr.min.js"></script>
   <script>
-    $(function () {
+    $(function() {
       var Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -241,7 +241,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
       });
       $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
       $('#example2').DataTable({
@@ -254,13 +256,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         "responsive": true,
       });
       // syncron
-      $(".syncButton").on("click", function () {
+      $(".syncButton").on("click", function() {
         showLoading()
         // Use AJAX to call the syncron function in the controller
         $.ajax({
           type: "POST",
           url: "<?php echo base_url('admin/syncron'); ?>",
-          success: function (response) {
+          success: function(response) {
             hideLoading();
             Toast.fire({
               icon: response.status,
@@ -269,7 +271,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             })
             // console.log(response)
           },
-          error: function (xhr, status, error) {
+          error: function(xhr, status, error) {
             console.log(xhr.responseJSON.message)
             hideLoading();
             // Handle error
@@ -282,6 +284,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
       });
     });
+
     function showLoading() {
       // Menampilkan elemen loading (Anda dapat menyesuaikan dengan elemen atau tindakan yang sesuai)
       document.getElementById('loading').style.display = 'block';
@@ -291,6 +294,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       // Menyembunyikan elemen loading
       document.getElementById('loading').style.display = 'none';
     }
+    $(document).ready(function() {
+      $('#summernote').summernote({
+        placeholder: 'Tulis di sini...',
+        tabsize: 2,
+        height: 300,
+      });
+    });
   </script>
 </body>
 

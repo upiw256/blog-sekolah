@@ -46,8 +46,9 @@ $routes->get('/news/cari', 'home::search_ajax');
 $routes->group('admin', ['isLoggedIn' => true], function ($routes) {
     // Route "/admin/users" akan terdaftar di sini
     $routes->get('/', 'admin::index');
-    $routes->get('news', 'admin::news');
-    $routes->get('news/(:any)', 'admin::edit/$1');
+    $routes->get('news', 'NewsController::index');
+    $routes->get('news/create', 'NewsController::create');
+    $routes->get('news/(:any)', 'NewsController::edit/$1');
     $routes->post('syncron', 'admin::syncron');
 });
 
