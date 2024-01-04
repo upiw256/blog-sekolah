@@ -26,7 +26,11 @@ use App\Models\RombonganBelajar;
  */
 abstract class BaseController extends Controller
 {
-    protected $sekolah = [];
+    protected $sekolah;
+    protected $news;
+    protected $ptk;
+    protected $siswa;
+    protected $kelas;
     /**
      * Instance of the main Request object.
      *
