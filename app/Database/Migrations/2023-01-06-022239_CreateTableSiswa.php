@@ -66,7 +66,8 @@ class CreateTableSiswa extends Migration
          ],
          'nomor_telepon_seluler' => [
             'type' => 'VARCHAR',
-            'constraint' => '255'
+            'constraint' => '255',
+            'null' => true
          ],
          'nama_ayah' => [
             'type' => 'VARCHAR',
