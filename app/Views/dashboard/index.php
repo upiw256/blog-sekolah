@@ -91,7 +91,10 @@
       <!-- /.row -->
       <div>
         <button class="btn btn-primary swalDefaultSuccess syncButton"><i class="fa fa-sync-alt"></i> Syncron
-          Dapodik</button>
+          PTK</button>
+
+        <button class="btn btn-primary swalDefaultSuccess syncButtonSiswa"><i class="fa fa-sync-alt"></i> Syncron
+          Siswa</button>
       </div>
       <h1>News Update</h1>
       <div class="row mt-3">
@@ -106,7 +109,7 @@
               <div class="card-body">
                 <!-- Add content here based on your data fields -->
                 <p>
-                  <?= esc($item->content) ?>
+                  <?= $item->content ?>
                 </p>
                 <!-- Add more fields as needed -->
               </div>

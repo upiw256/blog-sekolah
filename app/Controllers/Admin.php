@@ -51,22 +51,20 @@ class Admin extends BaseController
         ];
         $client = new Client();
         $sekolahData = $client->request('GET', $api_url . '/sekolah', ['headers' => $headers]);
-        $siswaData = $client->request('GET', $api_url . '/siswa', ['headers' => $headers]);
+
         $ptkData = $client->request('GET', $api_url . '/guru', ['headers' => $headers]);
         $rombelData = $client->request('GET', $api_url . '/rombel', ['headers' => $headers]);
 
         $sekolah = json_decode($sekolahData->getBody(), true);
-        $siswa = json_decode($siswaData->getBody(), true);
+
         $ptk = json_decode($ptkData->getBody(), true);
         $rombel = json_decode($rombelData->getBody(), true);
         $this->sekolah->truncate();
-        $this->siswa->truncate();
+
         $this->ptk->truncate();
         $this->kelas->truncate();
         $result = $this->sekolah->insert($sekolah['rows']);
-        foreach ($siswa['rows'] as $row) {
-            $result = $this->siswa->insert($row);
-        }
+
         foreach ($ptk['rows'] as $row) {
             $result = $this->ptk->insert($row);
         }
@@ -81,6 +79,33 @@ class Admin extends BaseController
             $response['message'] = 'Gagal menyimpan data ke dalam database.';
         }
 
+        return $this->response->setJSON($response);
+    }
+    public function syncronSiswa()
+    {
+        ini_set('max_execution_time', 240);
+        $api_url = getenv('DAPODIK_URL');
+        $headers = [
+            'x-Barrier' => 'margaasih',
+        ];
+        $client = new Client();
+        $siswaData = $client->request('GET', $api_url . '/siswa', ['headers' => $headers]);
+        $siswa = json_decode($siswaData->getBody(), true);
+        // $this->siswa->truncate();
+        foreach ($siswa['rows'] as $row) {
+            $existingData = $this->siswa->where('peserta_didik_id', $row['peserta_didik_id'])->first();
+            if (!$existingData) {
+                $result = $this->siswa->insert($row);
+            }
+            $response['message'] = $existingData;
+        }
+        if ($result) {
+            $response['status'] = 'success';
+            $response['message'] = 'Data berhasil disimpan ke dalam database.';
+        } else {
+            $response['status'] = 'error';
+            $response['message'] = 'Gagal menyimpan data ke dalam database.';
+        }
         return $this->response->setJSON($response);
     }
 }

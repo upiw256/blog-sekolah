@@ -14,7 +14,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <base href="<?= base_url('assets') ?>/">
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -101,7 +102,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: .8">
         <span class="brand-text font-weight-light">SMAN 1 Margaasih</span>
       </a>
 
@@ -228,7 +230,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="plugins/summernote/summernote-bs4.min.js"></script>
   <script src="plugins/toastr/toastr.min.js"></script>
   <script>
-    $(function() {
+    $(function () {
       var Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -256,13 +258,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         "responsive": true,
       });
       // syncron
-      $(".syncButton").on("click", function() {
+      $(".syncButton").on("click", function () {
         showLoading()
         // Use AJAX to call the syncron function in the controller
         $.ajax({
           type: "POST",
           url: "<?php echo base_url('admin/syncron'); ?>",
-          success: function(response) {
+          success: function (response) {
             hideLoading();
             Toast.fire({
               icon: response.status,
@@ -271,7 +273,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             })
             // console.log(response)
           },
-          error: function(xhr, status, error) {
+          error: function (xhr, status, error) {
             console.log(xhr.responseJSON.message)
             hideLoading();
             // Handle error
@@ -283,19 +285,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
           }
         });
       });
+      //sync siswa
+      $(".syncButtonSiswa").on("click", function () {
+        showLoading()
+        // Use AJAX to call the syncron function in the controller
+        $.ajax({
+          type: "POST",
+          url: "<?php echo base_url('admin/syncronSiswa'); ?>",
+          success: function (response) {
+            hideLoading();
+            Toast.fire({
+              icon: response.status,
+              title: 'syncron ' + response.status,
+              text: response.message
+            })
+            // console.log(response)
+          },
+          error: function (xhr, status, error) {
+            hideLoading();
+            console.log(xhr.responseText)
+            // Handle error
+            Toast.fire({
+              icon: status,
+              title: 'syncron gagal',
+              text: xhr.responseText
+            })
+          }
+        });
+      });
       //upload
-      $(".saveNews").on("click", function() {
-        $('#uploadForm').submit(function(e) {
+      $(".saveNews").click(function () {
+        $('#uploadForm').submit(function (e) {
           e.preventDefault();
 
           $.ajax({
             url: '/admin/news/post',
             type: 'post',
-            dataType: 'json',
+            // dataType: 'json',
             data: new FormData(this),
             // processData: false,
             // contentType: false,
-            success: function(response) {
+            success: function (response) {
               if (response.success) {
                 // Toast berhasil
                 Swal.fire({
@@ -313,7 +343,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 console.log(response.errors)
               }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
               // Toast gagal (terjadi kesalahan)
               Swal.fire({
                 icon: 'error',
@@ -336,7 +366,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       document.getElementById('loading').style.display = 'none';
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('#summernote').summernote({
         placeholder: 'Tulis di sini...',
         tabsize: 2,

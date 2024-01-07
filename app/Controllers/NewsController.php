@@ -65,13 +65,12 @@ class NewsController extends BaseController
             ];
 
             $newsModel->insert($data);
-            $response['success'] = true;
-            $response['message'] = 'Gambar berhasil diunggah.';
+            session()->setFlashdata('message', ['result' => 'success', 'message' => $this->validator->listErrors()]);
+            return redirect()->to('/admin/news/create');
         } else {
-            $response['success'] = false;
-            $response['errors'] = $this->validator->listErrors();
+            session()->setFlashdata('message', ['result' => 'danger', 'message' => $this->validator->listErrors()]);
+            return redirect()->to('/admin/news/create');
         }
-        return $this->response->setJSON($response);
     }
     public function edit($id = null)
     {

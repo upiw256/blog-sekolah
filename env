@@ -38,6 +38,15 @@
 # database.default.DBPrefix =
 # database.default.port = 3306
 
+database.default.hostname = gcp.connect.psdb.cloud
+database.default.database = blog
+database.default.username = 5ag4053lly7te0edb6lo
+database.default.password = pscale_pw_5Yfl7A73h2XIQwuBFZFYkxAY4245D6LIQvryupiAeWz
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+database.default.encrypt = {"ssl_verify":true,"ssl_ca":"/var/www/html/BaltimoreCyberTrustRoot.crt.pem"}
+
 # database.tests.hostname = localhost
 # database.tests.database = ci4_test
 # database.tests.username = root

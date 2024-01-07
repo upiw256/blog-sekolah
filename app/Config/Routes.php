@@ -51,6 +51,7 @@ $routes->group('admin', ['isLoggedIn' => true], function ($routes) {
     $routes->post('news/create', 'NewsController::post');
     $routes->get('news/(:any)', 'NewsController::edit/$1');
     $routes->post('syncron', 'admin::syncron');
+    $routes->post('syncronSiswa', 'admin::syncronSiswa');
 });
 
 /*
