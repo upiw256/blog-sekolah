@@ -7,14 +7,14 @@ $this->section('admin'); ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
 
-        <?php if (session()->has('message')): ?>
+        <?php if (session()->has('message')) : ?>
             <?php
             // Retrieve flash data
             $flashData = session()->getFlashdata('message');
             ?>
 
             <!-- Display flash data with AdminLTE alert classes -->
-            <div class="alert alert-<?= $flashData['result']; ?> alert-dismissible fade show" role="alert">
+            <div class="alert alert-<?= $flashData['result']; ?> alert-dismissible fade show autoCloseAlert" role="alert">
                 <?= preg_replace('/<ul>|<\/ul>|<li>|<\/li>/', '', $flashData['message']); ?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -48,15 +48,13 @@ $this->section('admin'); ?>
             </div>
             <div class="input-group mb-3">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="image" id="imageFile"
-                        onchange="tampilkanGambar()" accept="image/*">
+                    <input type="file" class="custom-file-input" name="image" id="imageFile" onchange="tampilkanGambar()" accept="image/*">
                     <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                 </div>
             </div>
             <div class="form-group" id="previewContainer" style="display: none;">
                 <label for="previewImage">Pratinjau Gambar:</label>
-                <img src="" alt="Pratinjau Gambar" class="img-thumbnail" id="previewImage"
-                    style="width: 300px; height: 200px;">
+                <img src="" alt="Pratinjau Gambar" class="img-thumbnail" id="previewImage" style="width: 300px; height: 200px;">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary saveNews">Simpan</button>
@@ -75,7 +73,7 @@ $this->section('admin'); ?>
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 // Setel atribut src elemen img dengan data URL gambar yang diunggah
                 previewImage.src = e.target.result;
                 // Tampilkan pratinjau container

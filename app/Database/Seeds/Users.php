@@ -9,7 +9,7 @@ class Users extends Seeder
     public function run()
     {
         $data = [
-            'username' => 'admin',
+            'username' => 'admin@admin.com',
             'password'    => password_hash('admin123', PASSWORD_DEFAULT),
         ];
         $this->db->table('users')->insert($data);
